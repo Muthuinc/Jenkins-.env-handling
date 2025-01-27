@@ -8,7 +8,7 @@ pipeline{
             steps{
                 dir('frontend'){
                     sh '''
-                    echo $VITE_API_URL >> .env
+                    echo "VITE_API_URL=${VITE_API_URL}" > .env
                     npm install && npm run build
                     '''
                 }
@@ -19,7 +19,7 @@ pipeline{
                 withCredentials([file(credentialsId: 'backend', variable: 'ENV_FILE')]){
                     dir('backend'){
                         sh '''
-                        cp ${ENV_FILE} .env
+                        echo ${ENV_FILE} > .env
                         npm install 
                         pm2 start app.js --name temp
                         '''
