@@ -4,7 +4,6 @@ pipeline{
         stage ('scm'){
             sh '''
             pwd
-            cd frontend && npm install
             '''
         }
     }
