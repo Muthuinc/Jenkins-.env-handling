@@ -16,13 +16,14 @@ pipeline{
         }
         stage ('backend'){
             steps{
-                withCredentials([file(credentialsID: 'backend', variable: 'ENV_FILE')])
-                dir('backend'){
-                    sh '''
-                    cp ${ENV_FILE} .env
-                    npm install 
-                    pm2 start app.js --name temp
-                    '''
+                withCredentials([file(credentialsID: 'backend', variable: 'ENV_FILE')]){
+                    dir('backend'){
+                        sh '''
+                        cp ${ENV_FILE} .env
+                        npm install 
+                        pm2 start app.js --name temp
+                        '''
+                    }
                 }
             }  
         }
