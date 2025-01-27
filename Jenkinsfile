@@ -19,7 +19,7 @@ pipeline{
                 withCredentials([file(credentialsId: 'backend', variable: 'ENV_FILE')]){
                     dir('backend'){
                         sh '''
-                        cp ${ENV_FILE} > .env
+                        cp ${ENV_FILE} .env
                         npm install 
                         pm2 start app.js --name temp
                         '''
