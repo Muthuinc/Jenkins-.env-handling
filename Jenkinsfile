@@ -2,7 +2,8 @@ pipeline{
     agent any
     stages{
         stage ('scm'){
-            pwd
+            steps{
+                sh 'pwd'    
         }
     }
 }
