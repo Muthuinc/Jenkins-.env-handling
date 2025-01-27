@@ -16,7 +16,7 @@ pipeline{
         }
         stage ('backend'){
             steps{
-                withCredentials([file(credentialsID: 'backend', variable: 'ENV_FILE')]){
+                withCredentials([file(credentialsId: 'backend', variable: 'ENV_FILE')]){
                     dir('backend'){
                         sh '''
                         cp ${ENV_FILE} .env
