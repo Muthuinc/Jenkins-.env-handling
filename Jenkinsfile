@@ -3,7 +3,8 @@ pipeline{
     stages{
         stage ('scm'){
             steps{
-                sh 'pwd'    
+                sh 'pwd'   
+            }
         }
     }
 }
