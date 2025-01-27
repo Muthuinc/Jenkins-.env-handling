@@ -6,17 +6,23 @@ pipeline{
     stages{
         stage ('scm'){
             steps{
-                sh '''
-                cd frontend
-                echo $VITE_API_URL >> .env
-                npm install && npm run build
-                '''
+                dir('frontend'){
+                    sh '''
+                    echo $VITE_API_URL >> .env
+                    npm install && npm run build
+                    '''
+                }
             }
         }
         stage ('backend'){
             steps{
+                withCredentials([file(credentialsID: 'backend', variable: 'ENV_FILE')])
                 dir('backend'){
-                    sh'npm install'
+                    sh '''
+                    cp ${ENV_FILE} .env
+                    npm install 
+                    pm2 start app.js --name temp
+                    '''
                 }
             }  
         }
