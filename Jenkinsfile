@@ -2,8 +2,10 @@ pipeline{
     agent any
     stages{
         stage ('scm'){
-            sh 'pwd'
-            sh 'cd frontend && npm install'
+            sh '''
+            pwd
+            cd frontend && npm install
+            '''
         }
     }
 }
