@@ -7,11 +7,18 @@ pipeline{
         stage ('scm'){
             steps{
                 sh '''
-                pwd
+                cd frontend
                 echo $VITE_API_URL >> .env
-                cat .env
+                npm install && npm run build
                 '''
             }
+        }
+        stage ('backend'){
+            steps{
+                dir('backend'){
+                    sh'npm install'
+                }
+            }  
         }
     }
 }
